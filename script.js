@@ -7,7 +7,6 @@ function checkAnagrams(str1, str2) {
     str.replace(/\s/g, "").toLowerCase().split("").sort().join("");
   return regexSorting(str1) === regexSorting(str2);
 }
-
 const str1 = "listen";
 const str2 = "silent";
 console.log(checkAnagrams(str1, str2));
@@ -136,3 +135,18 @@ console.log(isMatch(text1, pattern1));
 console.log(isMatch(text2, pattern2));
 
 //10.Write a function that finds the length of the longest increasing subsequence of a given array of integers.
+const lengthOfLIS = (nums) => {
+  if (nums.length === 0) return 0;
+  const dp = new Array(nums.length).fill(1);
+  nums.forEach((num, i) => {
+    for (let j = 0; j < i; j++) {
+      if (num > nums[j]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1);
+      }
+    }
+  });
+  return Math.max(...dp);
+};
+const nums = [10, 22, 9, 33, 21, 50, 41, 60, 80];
+const length = lengthOfLIS(nums);
+console.log(length);
